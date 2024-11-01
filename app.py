@@ -63,10 +63,10 @@ def generate_plots(N, mu, sigma2, S):
         Y_sim = np.random.normal(mu, np.sqrt(sigma2), N)
 
         # TODO: Fit a linear regression model to X_sim and Y_sim
-        sim_model = LinearRegression()              # Initialize model
+        sim_model = LinearRegression()                          # Initialize model
         sim_model.fit(X_sim.reshape(-1, 1), Y_sim)              # fit the model to X and Y
-        slope = model.coef_[0]                      # extract slope from the fitted model
-        intercept = model.intercept_                # extract intercept from the fitted model
+        slope = sim_model.coef_[0]                                  # extract slope from the fitted model
+        intercept = sim_model.intercept_                            # extract intercept from the fitted model
 
         # TODO: Append the slope and intercept of the model to slopes and intercepts lists
         slopes.append(slope)
