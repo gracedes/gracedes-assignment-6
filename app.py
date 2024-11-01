@@ -15,23 +15,33 @@ def generate_plots(N, mu, sigma2, S):
     # TODO 1: Generate a random dataset X of size N with values between 0 and 1
     # and a random dataset Y with normal additive error (mean mu, variance sigma^2).
     # Hint: Use numpy's random's functions to generate values for X and Y
-    X = None  # Replace with code to generate random values for X
-    Y = None  # Replace with code to generate random values for Y with specified mean and variance
+    X = np.random.rand(N)                                                   # generate random X values
+    Y = np.random.normal(mu, np.sqrt(sigma2), N)                            # generate Y values with normal additive error
 
     # TODO 2: Fit a linear regression model to X and Y
     # Hint: Use Scikit Learn
-    model = None
-    None  # Replace with code to fit the model
-    slope = None  # Replace with code to extract slope from the fitted model
-    intercept = None  # Replace with code to extract intercept from the fitted model
+    model = LinearRegression()                                              # initialize linear regression model
+    model.fit(X.reshape(-1, 1), Y)                                          # fit the model to X and Y
+    slope = model.coef_[0]                                                  # extract slope from the fitted model
+    intercept = model.intercept_                                            # extract intercept from the fitted model
 
     # TODO 3: Generate a scatter plot of (X, Y) with the fitted regression line
     # Hint: Use Matplotlib
     # Label the x-axis as "X" and the y-axis as "Y".
     # Add a title showing the regression line equation using the slope and intercept values.
     # Finally, save the plot to "static/plot1.png" using plt.savefig()
-    
+    plt.figure(figsize=(8, 6))
+    plt.scatter(X, Y, color='blue', label='Data points')
+    plt.plot(X, model.predict(X), color='red', label='Fitted line')         # plot the fitted regression line
+
+    plt.xlabel('X')
+    plt.ylabel('Y')
+
+    plt.title(f'Regression Line: Y = {slope:.2f}X + {intercept:.2f}')       # add title with regression line equation
+    plt.legend()
+
     plot1_path = "static/plot1.png"
+    plt.savefig(plot1_path)
     # Replace the above TODO 3 block with code to generate and save the plot
 
     
