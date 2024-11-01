@@ -32,12 +32,13 @@ def generate_plots(N, mu, sigma2, S):
     # Finally, save the plot to "static/plot1.png" using plt.savefig()
     plt.figure(figsize=(8, 6))
     plt.scatter(X, Y, color='blue', label='Data points')
-    plt.plot(X, model.predict(X), color='red', label='Fitted line')         # plot the fitted regression line
+    yfit = [intercept + slope * xi for xi in X]                 # generate regression line using slope and intercept
+    plt.plot(X, yfit, color='red', label='Fitted line')         # plot the fitted regression line
 
     plt.xlabel('X')
     plt.ylabel('Y')
 
-    plt.title(f'Regression Line: Y = {slope:.2f}X + {intercept:.2f}')       # add title with regression line equation
+    plt.title(f'Regression Line: Y = {slope:.2f}X + {intercept:.2f}')                       # add title with regression line equation
     plt.legend()
 
     plot1_path = "static/plot1.png"
@@ -63,7 +64,7 @@ def generate_plots(N, mu, sigma2, S):
 
         # TODO: Fit a linear regression model to X_sim and Y_sim
         sim_model = LinearRegression()              # Initialize model
-        model.fit(X.reshape(-1, 1), Y)              # fit the model to X and Y
+        sim_model.fit(X_sim.reshape(-1, 1), Y_sim)              # fit the model to X and Y
         slope = model.coef_[0]                      # extract slope from the fitted model
         intercept = model.intercept_                # extract intercept from the fitted model
 
