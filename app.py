@@ -56,18 +56,20 @@ def generate_plots(N, mu, sigma2, S):
     # Hint: For each iteration, create random X and Y values using the provided parameters
     for _ in range(S):
         # TODO: Generate random X values with size N between 0 and 1
-        X_sim = None  # Replace with code to generate X values
+        X_sim = np.random.rand(N)
 
         # TODO: Generate Y values with normal additive error (mean mu, variance sigma^2)
-        Y_sim = None  # Replace with code to generate Y values
+        Y_sim = np.random.normal(mu, np.sqrt(sigma2), N)
 
         # TODO: Fit a linear regression model to X_sim and Y_sim
-        sim_model = None  # Initialize model
-        None  # Replace with code to fit model
+        sim_model = LinearRegression()              # Initialize model
+        model.fit(X.reshape(-1, 1), Y)              # fit the model to X and Y
+        slope = model.coef_[0]                      # extract slope from the fitted model
+        intercept = model.intercept_                # extract intercept from the fitted model
 
         # TODO: Append the slope and intercept of the model to slopes and intercepts lists
-        slopes.append(None)  # Replace None with code to append slope
-        intercepts.append(None)  # Replace None with code to append intercept
+        slopes.append(slope)
+        intercepts.append(intercept)
 
     # Plot histograms of slopes and intercepts
     plt.figure(figsize=(10, 5))
